@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace Ideacrafters\PixelManager\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class PixelManagerCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'pixels';
 
     public $description = 'My command';
 
