@@ -2,11 +2,10 @@
 
 namespace Ideacrafters\PixelManager\Commands;
 
-use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Crypt;
 use Ideacrafters\PixelManager\Exceptions\InvalidPlatformException;
 use Ideacrafters\PixelManager\Facades\PixelManager;
 use Ideacrafters\PixelManager\Models\Pixel;
+use Illuminate\Console\Command;
 
 class PixelAddCommand extends Command
 {
@@ -86,4 +85,3 @@ class PixelAddCommand extends Command
         }
     }
 }
-

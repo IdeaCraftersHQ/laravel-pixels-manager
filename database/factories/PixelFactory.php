@@ -58,4 +58,3 @@ class PixelFactory extends Factory
         ]);
     }
 }
-

@@ -2,8 +2,8 @@
 
 namespace Ideacrafters\PixelManager\Commands;
 
-use Illuminate\Console\Command;
 use Ideacrafters\PixelManager\Facades\PixelManager as PixelManagerFacade;
+use Illuminate\Console\Command;
 
 class PixelTestCommand extends Command
 {
@@ -63,7 +63,7 @@ class PixelTestCommand extends Command
             $this->newLine();
             $this->info('Event Details:');
             $this->line("  Platform: {$pixel->platform}");
-            $this->line("  Event: PageView");
+            $this->line('  Event: PageView');
             $this->line("  Pixel ID: {$pixel->pixel_id}");
             $this->newLine();
             $this->info('Check your pixel dashboard to verify the event was received.');
@@ -98,4 +98,3 @@ class PixelTestCommand extends Command
         return $pixels->get($index);
     }
 }
-

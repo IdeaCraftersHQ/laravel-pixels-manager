@@ -51,6 +51,7 @@ class Pixel extends Model
     {
         if (is_null($value)) {
             $this->attributes['access_token'] = null;
+
             return;
         }
 

@@ -8,4 +8,3 @@ class PlatformApiException extends Exception
 {
     //
 }
-

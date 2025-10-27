@@ -2,13 +2,13 @@
 
 namespace Ideacrafters\PixelManager;
 
+use Ideacrafters\PixelManager\Commands\PixelAddCommand;
+use Ideacrafters\PixelManager\Commands\PixelInstallCommand;
+use Ideacrafters\PixelManager\Commands\PixelManagerCommand;
+use Ideacrafters\PixelManager\Commands\PixelTestCommand;
 use Illuminate\Support\Facades\Blade;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Ideacrafters\PixelManager\Commands\PixelManagerCommand;
-use Ideacrafters\PixelManager\Commands\PixelInstallCommand;
-use Ideacrafters\PixelManager\Commands\PixelAddCommand;
-use Ideacrafters\PixelManager\Commands\PixelTestCommand;
 
 class PixelManagerServiceProvider extends PackageServiceProvider
 {

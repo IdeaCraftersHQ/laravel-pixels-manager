@@ -2,9 +2,9 @@
 
 namespace Ideacrafters\PixelManager\Tests;
 
+use Ideacrafters\PixelManager\PixelManagerServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use Ideacrafters\PixelManager\PixelManagerServiceProvider;
 
 class TestCase extends Orchestra
 {

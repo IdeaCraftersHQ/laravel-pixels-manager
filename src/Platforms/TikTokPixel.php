@@ -2,8 +2,6 @@
 
 namespace Ideacrafters\PixelManager\Platforms;
 
-use Ideacrafters\PixelManager\Models\Pixel;
-
 class TikTokPixel extends AbstractPlatform
 {
     protected function getApiEndpoint(): string
@@ -133,4 +131,3 @@ class TikTokPixel extends AbstractPlatform
         return hash('sha256', implode('|', $parts));
     }
 }
-

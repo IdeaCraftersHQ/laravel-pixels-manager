@@ -1,12 +1,11 @@
 <?php
 
-use Ideacrafters\PixelManager\Exceptions\InvalidEventException;
 use Ideacrafters\PixelManager\Exceptions\InvalidPlatformException;
-use Ideacrafters\PixelManager\PixelManager;
 use Ideacrafters\PixelManager\Models\Pixel;
+use Ideacrafters\PixelManager\PixelManager;
 
 beforeEach(function () {
-    $this->pixelManager = new PixelManager();
+    $this->pixelManager = new PixelManager;
     $this->pixel = Pixel::factory()->facebook()->create();
 });
 
@@ -48,4 +47,3 @@ test('can get active pixels', function () {
     expect($pixels)->toHaveCount(1)
         ->and($pixels->first()->is_active)->toBeTrue();
 });
-

@@ -3,7 +3,6 @@
 namespace Ideacrafters\PixelManager\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Artisan;
 
 class PixelInstallCommand extends Command
 {
@@ -60,4 +59,3 @@ class PixelInstallCommand extends Command
         return self::SUCCESS;
     }
 }
-

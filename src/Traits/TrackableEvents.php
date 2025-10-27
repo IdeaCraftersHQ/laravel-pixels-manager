@@ -9,10 +9,7 @@ trait TrackableEvents
     /**
      * Track a custom event.
      *
-     * @param  string  $event
-     * @param  array  $data
      * @param  string|null  $platforms  Comma-separated list of platforms or null for all
-     * @return void
      */
     public function trackEvent(string $event, array $data = [], ?string $platforms = null): void
     {
@@ -28,10 +25,6 @@ trait TrackableEvents
 
     /**
      * Track a page view event.
-     *
-     * @param  string|null  $url
-     * @param  string|null  $platforms
-     * @return void
      */
     public function trackPageView(?string $url = null, ?string $platforms = null): void
     {
@@ -48,10 +41,6 @@ trait TrackableEvents
      * Track a view content event.
      *
      * @param  string|int  $contentId
-     * @param  string  $contentName
-     * @param  float|null  $value
-     * @param  string|null  $platforms
-     * @return void
      */
     public function trackViewContent($contentId, string $contentName, ?float $value = null, ?string $platforms = null): void
     {
@@ -72,10 +61,6 @@ trait TrackableEvents
      * Track an add to cart event.
      *
      * @param  string|int  $contentId
-     * @param  float  $value
-     * @param  string  $currency
-     * @param  string|null  $platforms
-     * @return void
      */
     public function trackAddToCart($contentId, float $value, string $currency = 'USD', ?string $platforms = null): void
     {
@@ -91,12 +76,6 @@ trait TrackableEvents
 
     /**
      * Track an initiate checkout event.
-     *
-     * @param  float  $value
-     * @param  string  $currency
-     * @param  array  $contents
-     * @param  string|null  $platforms
-     * @return void
      */
     public function trackInitiateCheckout(float $value, string $currency = 'USD', array $contents = [], ?string $platforms = null): void
     {
@@ -112,12 +91,6 @@ trait TrackableEvents
 
     /**
      * Track a purchase event.
-     *
-     * @param  float  $value
-     * @param  string  $currency
-     * @param  array  $contents
-     * @param  string|null  $platforms
-     * @return void
      */
     public function trackPurchase(float $value, string $currency = 'USD', array $contents = [], ?string $platforms = null): void
     {
@@ -134,8 +107,6 @@ trait TrackableEvents
     /**
      * Get user data for tracking.
      * Override this method to provide custom user data.
-     *
-     * @return array
      */
     protected function getTrackingUserData(): array
     {
@@ -170,4 +141,3 @@ trait TrackableEvents
         return $userData;
     }
 }
-

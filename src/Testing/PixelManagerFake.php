@@ -2,8 +2,6 @@
 
 namespace Ideacrafters\PixelManager\Testing;
 
-use Ideacrafters\PixelManager\PixelManager;
-
 class PixelManagerFake
 {
     protected array $trackedEvents = [];
@@ -52,4 +50,3 @@ class PixelManagerFake
         $this->trackedEvents = [];
     }
 }
-

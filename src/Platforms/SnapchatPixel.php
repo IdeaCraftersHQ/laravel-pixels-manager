@@ -2,8 +2,6 @@
 
 namespace Ideacrafters\PixelManager\Platforms;
 
-use Ideacrafters\PixelManager\Models\Pixel;
-
 class SnapchatPixel extends AbstractPlatform
 {
     protected function getApiEndpoint(): string
@@ -83,4 +81,3 @@ class SnapchatPixel extends AbstractPlatform
         return hash('sha256', implode('|', $parts));
     }
 }
-

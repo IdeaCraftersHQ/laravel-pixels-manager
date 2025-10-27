@@ -2,26 +2,22 @@
 
 namespace Ideacrafters\PixelManager;
 
-use Illuminate\Support\Facades\Cache;
 use Ideacrafters\PixelManager\Exceptions\InvalidEventException;
 use Ideacrafters\PixelManager\Exceptions\InvalidPlatformException;
-use Ideacrafters\PixelManager\Exceptions\PixelNotFoundException;
 use Ideacrafters\PixelManager\Jobs\SendPixelEvent;
 use Ideacrafters\PixelManager\Models\Pixel;
+use Illuminate\Support\Facades\Cache;
 
 class PixelManager
 {
     protected ?array $targetPlatforms = null;
+
     protected ?array $targetPixelIds = null;
+
     protected bool $excludeMode = false;
 
     /**
      * Track an event to all active pixels or selectively targeted ones.
-     *
-     * @param  string  $event
-     * @param  array  $data
-     * @param  array  $userData
-     * @return static
      */
     public function track(string $event, array $data = [], array $userData = []): static
     {
@@ -52,9 +48,6 @@ class PixelManager
 
     /**
      * Target specific platforms.
-     *
-     * @param  string  ...$platforms
-     * @return static
      */
     public function forPlatforms(string ...$platforms): static
     {
@@ -67,9 +60,6 @@ class PixelManager
 
     /**
      * Target specific pixel IDs.
-     *
-     * @param  int  ...$pixelIds
-     * @return static
      */
     public function forPixels(int ...$pixelIds): static
     {
@@ -81,9 +71,6 @@ class PixelManager
 
     /**
      * Exclude specific platforms.
-     *
-     * @param  string  ...$platforms
-     * @return static
      */
     public function except(string ...$platforms): static
     {
@@ -98,9 +85,6 @@ class PixelManager
     /**
      * Add a new pixel configuration.
      *
-     * @param  string  $platform
-     * @param  string  $pixelId
-     * @param  string|null  $accessToken
      * @return \Ideacrafters\PixelManager\Models\Pixel
      */
     public function addPixel(string $platform, string $pixelId, ?string $accessToken = null)
@@ -119,9 +103,6 @@ class PixelManager
 
     /**
      * Enable a pixel.
-     *
-     * @param  int  $id
-     * @return bool
      */
     public function enablePixel(int $id): bool
     {
@@ -134,9 +115,6 @@ class PixelManager
 
     /**
      * Disable a pixel.
-     *
-     * @param  int  $id
-     * @return bool
      */
     public function disablePixel(int $id): bool
     {
@@ -183,8 +161,6 @@ class PixelManager
     /**
      * Validate event name.
      *
-     * @param  string  $event
-     * @return void
      * @throws \Ideacrafters\PixelManager\Exceptions\InvalidEventException
      */
     protected function validateEvent(string $event): void
@@ -199,8 +175,6 @@ class PixelManager
     /**
      * Validate platform name.
      *
-     * @param  string  $platform
-     * @return void
      * @throws \Ideacrafters\PixelManager\Exceptions\InvalidPlatformException
      */
     public function validatePlatform(string $platform): void
@@ -215,8 +189,6 @@ class PixelManager
     /**
      * Validate array of platform names.
      *
-     * @param  array  $platforms
-     * @return void
      * @throws \Ideacrafters\PixelManager\Exceptions\InvalidPlatformException
      */
     protected function validatePlatforms(array $platforms): void
@@ -228,8 +200,6 @@ class PixelManager
 
     /**
      * Check if deduplication is enabled.
-     *
-     * @return bool
      */
     protected function shouldDeduplicate(): bool
     {
@@ -238,12 +208,6 @@ class PixelManager
 
     /**
      * Check if this event is a duplicate.
-     *
-     * @param  \Ideacrafters\PixelManager\Models\Pixel  $pixel
-     * @param  string  $event
-     * @param  array  $data
-     * @param  array  $userData
-     * @return bool
      */
     protected function isDuplicate(Pixel $pixel, string $event, array $data, array $userData): bool
     {
@@ -255,12 +219,6 @@ class PixelManager
 
     /**
      * Store deduplication hash in cache.
-     *
-     * @param  \Ideacrafters\PixelManager\Models\Pixel  $pixel
-     * @param  string  $event
-     * @param  array  $data
-     * @param  array  $userData
-     * @return void
      */
     protected function storeDeduplicationHash(Pixel $pixel, string $event, array $data, array $userData): void
     {
@@ -273,12 +231,6 @@ class PixelManager
 
     /**
      * Generate deduplication hash.
-     *
-     * @param  \Ideacrafters\PixelManager\Models\Pixel  $pixel
-     * @param  string  $event
-     * @param  array  $data
-     * @param  array  $userData
-     * @return string
      */
     protected function generateDeduplicationHash(Pixel $pixel, string $event, array $data, array $userData): string
     {
@@ -295,9 +247,6 @@ class PixelManager
 
     /**
      * Get deduplication cache key.
-     *
-     * @param  string  $hash
-     * @return string
      */
     protected function getDeduplicationCacheKey(string $hash): string
     {
@@ -308,8 +257,6 @@ class PixelManager
 
     /**
      * Reset targeting options.
-     *
-     * @return void
      */
     protected function resetTargeting(): void
     {

@@ -48,4 +48,3 @@ test('throws exception for invalid platform', function () {
     expect(fn () => PixelManager::forPlatforms('invalid-platform'))
         ->toThrow(\Ideacrafters\PixelManager\Exceptions\InvalidPlatformException::class);
 });
-

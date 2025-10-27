@@ -109,4 +109,3 @@ abstract class AbstractPlatform implements PlatformPixelInterface
         return $this->getApiEndpoint();
     }
 }
-

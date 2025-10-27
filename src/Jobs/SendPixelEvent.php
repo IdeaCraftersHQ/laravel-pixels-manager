@@ -2,6 +2,8 @@
 
 namespace Ideacrafters\PixelManager\Jobs;
 
+use Ideacrafters\PixelManager\Contracts\PlatformPixelInterface;
+use Ideacrafters\PixelManager\Exceptions\PlatformApiException;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Database\Eloquent\Model;
@@ -9,8 +11,6 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
-use Ideacrafters\PixelManager\Contracts\PlatformPixelInterface;
-use Ideacrafters\PixelManager\Exceptions\PlatformApiException;
 
 class SendPixelEvent implements ShouldQueue
 {
@@ -71,10 +71,9 @@ class SendPixelEvent implements ShouldQueue
         $adapter = app($platformClass);
 
         if (! $adapter instanceof PlatformPixelInterface) {
-            throw new \RuntimeException("Platform adapter must implement PlatformPixelInterface");
+            throw new \RuntimeException('Platform adapter must implement PlatformPixelInterface');
         }
 
         return $adapter;
     }
 }
-

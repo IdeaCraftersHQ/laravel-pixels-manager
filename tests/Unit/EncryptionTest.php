@@ -27,4 +27,3 @@ test('can handle null access token', function () {
 
     expect($pixel->access_token)->toBeNull();
 });
-

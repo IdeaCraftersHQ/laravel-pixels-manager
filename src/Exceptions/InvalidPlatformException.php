@@ -8,4 +8,3 @@ class InvalidPlatformException extends Exception
 {
     //
 }
-

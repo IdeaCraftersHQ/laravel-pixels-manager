@@ -2,8 +2,6 @@
 
 namespace Ideacrafters\PixelManager\Platforms;
 
-use Ideacrafters\PixelManager\Models\Pixel;
-
 class FacebookPixel extends AbstractPlatform
 {
     protected function getApiEndpoint(): string
@@ -171,4 +169,3 @@ class FacebookPixel extends AbstractPlatform
         return hash('sha256', implode('|', $parts));
     }
 }
-

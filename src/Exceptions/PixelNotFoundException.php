@@ -8,4 +8,3 @@ class PixelNotFoundException extends Exception
 {
     //
 }
-

@@ -8,4 +8,3 @@ class InvalidEventException extends Exception
 {
     //
 }
-
