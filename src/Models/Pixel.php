@@ -67,6 +67,14 @@ class Pixel extends Model
     }
 
     /**
+     * Scope to filter by access token exists.
+     */
+    public function scopeHasAccessToken($query)
+    {
+        return $query->whereNotNull('access_token');
+    }
+
+    /**
      * Scope to filter by platform.
      */
     public function scopePlatform($query, string $platform)

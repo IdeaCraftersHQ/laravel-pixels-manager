@@ -145,7 +145,7 @@ class PixelManager
     protected function getApplicablePixels()
     {
         $modelClass = config('pixels-manager.model', \Ideacrafters\PixelManager\Models\Pixel::class);
-        $query = $modelClass::active();
+        $query = $modelClass::active()->hasAccessToken();
 
         if ($this->targetPixelIds !== null) {
             $query->whereIn('id', $this->targetPixelIds);

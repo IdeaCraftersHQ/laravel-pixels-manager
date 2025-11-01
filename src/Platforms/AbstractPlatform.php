@@ -74,9 +74,10 @@ abstract class AbstractPlatform implements PlatformPixelInterface
     public function hashUserData(array $userData): array
     {
         $hashed = [];
+        $keysTohash = ['email', 'phone_number', 'phone' , 'first_name', 'last_name', 'city', 'state', 'zip', 'country', 'name'];
 
         foreach ($userData as $key => $value) {
-            if (in_array($key, ['email', 'phone_number', 'phone'])) {
+            if (in_array($key, $keysTohash)) {
                 $hashed[$key] = hash('sha256', strtolower($value));
             } else {
                 $hashed[$key] = $value;

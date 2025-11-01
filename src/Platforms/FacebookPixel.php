@@ -6,7 +6,7 @@ class FacebookPixel extends AbstractPlatform
 {
     protected function getApiEndpoint(): string
     {
-        return "https://graph.facebook.com/v18.0/{$this->pixel->pixel_id}/events";
+        return "https://graph.facebook.com/v23.0/{$this->pixel->pixel_id}/events";
     }
 
     protected function getHeaders(): array
@@ -30,9 +30,9 @@ class FacebookPixel extends AbstractPlatform
                     'action_source' => 'website',
                     'user_data' => $this->buildUserData($userData),
                     'custom_data' => $this->buildCustomData($data),
-                    'test_event_code' => $this->pixel->test_event_code,
                 ],
             ],
+            'test_event_code' => $this->pixel->test_event_code,
             'access_token' => $this->pixel->access_token,
         ];
     }
