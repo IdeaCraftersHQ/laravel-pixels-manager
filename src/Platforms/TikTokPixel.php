@@ -70,16 +70,16 @@ class TikTokPixel extends AbstractPlatform
         }
 
         // If not running from console, auto-populate missing fields from request/cookie
-        if (!app()->runningInConsole()) {
-            if (!isset($mapped['ip'])) {
+        if (! app()->runningInConsole()) {
+            if (! isset($mapped['ip'])) {
                 $mapped['ip'] = request()->ip();
             }
 
-            if (!isset($mapped['user_agent'])) {
+            if (! isset($mapped['user_agent'])) {
                 $mapped['user_agent'] = request()->userAgent();
             }
 
-            if (!isset($mapped['ttp'])) {
+            if (! isset($mapped['ttp'])) {
                 $ttpCookie = request()->cookie('_ttp');
                 if ($ttpCookie) {
                     $mapped['ttp'] = $ttpCookie;
@@ -94,7 +94,7 @@ class TikTokPixel extends AbstractPlatform
     {
         $page = [];
 
-        if (!app()->runningInConsole()) {
+        if (! app()->runningInConsole()) {
             $page['url'] = request()->fullUrl();
             $page['referrer'] = request()->header('referer');
         }
