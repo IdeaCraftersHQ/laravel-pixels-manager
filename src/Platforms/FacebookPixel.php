@@ -73,26 +73,43 @@ class FacebookPixel extends AbstractPlatform
             $mapped['country'] = $userData['country'];
         }
 
-        // Add IP address, user agent, and _fbp cookie when not running from console
-        if (! app()->runningInConsole()) {
-            if (isset($userData['client_ip_address'])) {
-                $mapped['client_ip_address'] = $userData['client_ip_address'];
-            } else {
+        if (isset($userData['client_ip_address'])) {
+            $mapped['client_ip_address'] = $userData['client_ip_address'];
+        }
+
+        if (isset($userData['client_user_agent'])) {
+            $mapped['client_user_agent'] = $userData['client_user_agent'];
+        }
+
+        if (isset($userData['fbp']) || isset($userData['_fbp'])) {
+            $mapped['fbp'] = $userData['fbp'] ?? $userData['_fbp'];
+        }
+
+        if (isset($userData['fbc']) || isset($userData['_fbc'])) {
+            $mapped['fbc'] = $userData['fbc'] ?? $userData['_fbc'];
+        }
+
+        // If not running from console, auto-populate missing fields from request/cookie
+        if (!app()->runningInConsole()) {
+            if (!isset($mapped['client_ip_address'])) {
                 $mapped['client_ip_address'] = request()->ip();
             }
 
-            if (isset($userData['client_user_agent'])) {
-                $mapped['client_user_agent'] = $userData['client_user_agent'];
-            } else {
+            if (!isset($mapped['client_user_agent'])) {
                 $mapped['client_user_agent'] = request()->userAgent();
             }
 
-            if (isset($userData['fbp']) || isset($userData['_fbp'])) {
-                $mapped['fbp'] = $userData['fbp'] ?? $userData['_fbp'];
-            } else {
+            if (!isset($mapped['fbp'])) {
                 $fbpCookie = request()->cookie('_fbp');
                 if ($fbpCookie) {
                     $mapped['fbp'] = $fbpCookie;
+                }
+            }
+
+            if (!isset($mapped['fbc'])) {
+                $fbcCookie = request()->cookie('_fbc');
+                if ($fbcCookie) {
+                    $mapped['fbc'] = $fbcCookie;
                 }
             }
         }
