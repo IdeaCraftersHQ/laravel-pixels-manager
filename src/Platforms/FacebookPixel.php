@@ -90,23 +90,23 @@ class FacebookPixel extends AbstractPlatform
         }
 
         // If not running from console, auto-populate missing fields from request/cookie
-        if (!app()->runningInConsole()) {
-            if (!isset($mapped['client_ip_address'])) {
+        if (! app()->runningInConsole()) {
+            if (! isset($mapped['client_ip_address'])) {
                 $mapped['client_ip_address'] = request()->ip();
             }
 
-            if (!isset($mapped['client_user_agent'])) {
+            if (! isset($mapped['client_user_agent'])) {
                 $mapped['client_user_agent'] = request()->userAgent();
             }
 
-            if (!isset($mapped['fbp'])) {
+            if (! isset($mapped['fbp'])) {
                 $fbpCookie = request()->cookie('_fbp');
                 if ($fbpCookie) {
                     $mapped['fbp'] = $fbpCookie;
                 }
             }
 
-            if (!isset($mapped['fbc'])) {
+            if (! isset($mapped['fbc'])) {
                 $fbcCookie = request()->cookie('_fbc');
                 if ($fbcCookie) {
                     $mapped['fbc'] = $fbcCookie;
