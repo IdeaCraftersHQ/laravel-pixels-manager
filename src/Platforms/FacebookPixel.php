@@ -74,7 +74,7 @@ class FacebookPixel extends AbstractPlatform
         }
 
         // Add IP address, user agent, and _fbp cookie when not running from console
-        if (!app()->runningInConsole()) {
+        if (! app()->runningInConsole()) {
             if (isset($userData['client_ip_address'])) {
                 $mapped['client_ip_address'] = $userData['client_ip_address'];
             } else {
