@@ -26,14 +26,7 @@ class TikTokPixel extends AbstractPlatform
                 'event_id' => $this->generateEventId($event, $data, $userData),
                 'timestamp' => now()->toISOString(),
                 'pixel_code' => $this->pixel->pixel_id,
-                'context' => [
-                    'page' => [
-                        'url' => request()->fullUrl(),
-                        'referrer' => request()->header('referer'),
-                    ],
-                    'user_agent' => request()->userAgent(),
-                    'ip' => request()->ip(),
-                ],
+                'page' => $this->buildPage(),
                 'properties' => [
                     'contents' => $data['contents'] ?? null,
                     'content_type' => $data['content_type'] ?? 'product',
@@ -60,35 +53,53 @@ class TikTokPixel extends AbstractPlatform
             $mapped['phone_number'] = $userData['phone_number'] ?? $userData['phone'];
         }
 
-        if (isset($userData['first_name'])) {
-            $mapped['first_name'] = $userData['first_name'];
-        }
-
-        if (isset($userData['last_name'])) {
-            $mapped['last_name'] = $userData['last_name'];
-        }
-
         if (isset($userData['external_id'])) {
             $mapped['external_id'] = $userData['external_id'];
         }
 
-        if (isset($userData['city'])) {
-            $mapped['city'] = $userData['city'];
+        if (isset($userData['ip'])) {
+            $mapped['ip'] = $userData['ip'];
         }
 
-        if (isset($userData['state'])) {
-            $mapped['state'] = $userData['state'];
+        if (isset($userData['user_agent'])) {
+            $mapped['user_agent'] = $userData['user_agent'];
         }
 
-        if (isset($userData['zip'])) {
-            $mapped['zip_code'] = $userData['zip'];
+        if (isset($userData['ttp'])) {
+            $mapped['ttp'] = $userData['ttp'];
         }
 
-        if (isset($userData['country'])) {
-            $mapped['country_code'] = $userData['country'];
+        // If not running from console, auto-populate missing fields from request/cookie
+        if (!app()->runningInConsole()) {
+            if (!isset($mapped['ip'])) {
+                $mapped['ip'] = request()->ip();
+            }
+
+            if (!isset($mapped['user_agent'])) {
+                $mapped['user_agent'] = request()->userAgent();
+            }
+
+            if (!isset($mapped['ttp'])) {
+                $ttpCookie = request()->cookie('_ttp');
+                if ($ttpCookie) {
+                    $mapped['ttp'] = $ttpCookie;
+                }
+            }
         }
 
         return $mapped;
+    }
+
+    protected function buildPage(): array
+    {
+        $page = [];
+
+        if (!app()->runningInConsole()) {
+            $page['url'] = request()->fullUrl();
+            $page['referrer'] = request()->header('referer');
+        }
+
+        return $page;
     }
 
     public function getScriptTag(): string
