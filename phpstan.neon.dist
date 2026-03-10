@@ -10,3 +10,10 @@ parameters:
     tmpDir: build/phpstan
     checkOctaneCompatibility: true
     checkModelProperties: true
+    ignoreErrors:
+        - '#Parameter \#1 \$view of function view expects view-string\|null, string given#'
+        - '#Trait Ideacrafters\\PixelManager\\Traits\\TrackableEvents is used zero times and is not analysed#'
+        -
+            message: "#Called 'env' outside of the config directory#"
+            paths:
+                - config/

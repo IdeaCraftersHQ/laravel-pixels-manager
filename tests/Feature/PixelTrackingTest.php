@@ -32,11 +32,15 @@ test('can track event to specific platforms', function () {
 test('can exclude platforms from tracking', function () {
     Queue::fake();
 
-    $this->pixel = Pixel::factory()->tiktok()->create();
+    Pixel::factory()->tiktok()->create();
 
     PixelManager::except('tiktok')->track('PageView');
 
-    Queue::assertNotPushed(SendPixelEvent::class);
+    Queue::assertPushed(SendPixelEvent::class, function ($job) {
+        return $job->pixel->platform === 'facebook';
+    });
+
+    Queue::assertPushed(SendPixelEvent::class, 1);
 });
 
 test('throws exception for invalid event', function () {
