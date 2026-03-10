@@ -4,9 +4,9 @@ namespace Ideacrafters\PixelManager\Jobs;
 
 use Ideacrafters\PixelManager\Contracts\PlatformPixelInterface;
 use Ideacrafters\PixelManager\Exceptions\PlatformApiException;
+use Ideacrafters\PixelManager\Models\Pixel;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Ideacrafters\PixelManager\Models\Pixel;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
