@@ -21,6 +21,12 @@ class PixelManager
      */
     public function track(string $event, array $data = [], array $userData = []): static
     {
+        if ($this->targetPixelIds !== null && empty($this->targetPixelIds)) {
+            $this->resetTargeting();
+
+            return $this;
+        }
+
         $this->validateEvent($event);
 
         $pixels = $this->getApplicablePixels();
@@ -60,10 +66,18 @@ class PixelManager
 
     /**
      * Target specific pixel IDs.
+     *
+     * @param  int|array<int>|\Illuminate\Support\Collection  ...$pixelIds
      */
-    public function forPixels(int ...$pixelIds): static
+    public function forPixels(int|array|\Illuminate\Support\Collection ...$pixelIds): static
     {
-        $this->targetPixelIds = $pixelIds;
+        $this->targetPixelIds = collect($pixelIds)
+            ->flatten()
+            ->map(fn ($id) => (int) $id)
+            ->unique()
+            ->values()
+            ->all();
+
         $this->targetPlatforms = null;
 
         return $this;
