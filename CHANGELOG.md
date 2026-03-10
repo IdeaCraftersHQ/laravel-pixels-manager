@@ -2,6 +2,19 @@
 
 All notable changes to `laravel-pixels-manager` will be documented in this file.
 
+## Release 1.1.0 Fix forPixels() to accept flexible inputs - 2026-03-10
+
+### What's Changed
+
+* Bump dependabot/fetch-metadata from 2.4.0 to 2.5.0 by @dependabot[bot] in https://github.com/IdeaCraftersHQ/laravel-pixels-manager/pull/4
+* Fix forPixels() to accept array and Collection inputs by @y-boudehane in https://github.com/IdeaCraftersHQ/laravel-pixels-manager/pull/5
+
+### New Contributors
+
+* @y-boudehane made their first contribution in https://github.com/IdeaCraftersHQ/laravel-pixels-manager/pull/5
+
+**Full Changelog**: https://github.com/IdeaCraftersHQ/laravel-pixels-manager/compare/1.0.2...1.1.0
+
 ## Release 1.0.2 Fixed fbc & fbq - 2025-11-27
 
 ### What's Changed
