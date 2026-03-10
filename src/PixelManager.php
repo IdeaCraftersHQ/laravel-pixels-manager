@@ -154,10 +154,11 @@ class PixelManager
     /**
      * Get pixels filtered by targeting criteria.
      *
-     * @return \Illuminate\Database\Eloquent\Collection
+     * @return \Illuminate\Database\Eloquent\Collection<int, Pixel>
      */
     protected function getApplicablePixels()
     {
+        /** @var class-string<Pixel> $modelClass */
         $modelClass = config('pixels-manager.model', \Ideacrafters\PixelManager\Models\Pixel::class);
         $query = $modelClass::active()->hasAccessToken();
 

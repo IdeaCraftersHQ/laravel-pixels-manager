@@ -6,7 +6,7 @@ use Ideacrafters\PixelManager\Contracts\PlatformPixelInterface;
 use Ideacrafters\PixelManager\Exceptions\PlatformApiException;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Database\Eloquent\Model;
+use Ideacrafters\PixelManager\Models\Pixel;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
@@ -17,7 +17,7 @@ class SendPixelEvent implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     public function __construct(
-        public Model $pixel,
+        public Pixel $pixel,
         public string $event,
         public array $data = [],
         public array $userData = []

@@ -4,7 +4,6 @@ namespace Ideacrafters\PixelManager\Commands;
 
 use Ideacrafters\PixelManager\Exceptions\InvalidPlatformException;
 use Ideacrafters\PixelManager\Facades\PixelManager;
-use Ideacrafters\PixelManager\Models\Pixel;
 use Illuminate\Console\Command;
 
 class PixelAddCommand extends Command
@@ -40,7 +39,7 @@ class PixelAddCommand extends Command
 
         // Validate platform
         try {
-            PixelManager::validatePlatform($platform);
+            app(\Ideacrafters\PixelManager\PixelManager::class)->validatePlatform($platform);
         } catch (InvalidPlatformException $e) {
             $this->error($e->getMessage());
 
