@@ -126,6 +126,29 @@ $user->trackAddToCart($product->id, $product->price);
 $user->trackViewContent($product->id, $product->name, $product->price);
 ```
 
+### Passing Browser Context (Queue-Safe CAPI)
+
+When tracking from HTTP context but dispatching via queue, pass browser data through `extraUserData`:
+
+```php
+$user->trackEvent('Purchase', [
+    'value' => 29.99,
+    'currency' => 'USD',
+    'event_id' => 'your-dedup-id',           // optional: for client-server dedup
+    'event_source_url' => request()->fullUrl(), // optional: captured before queue
+], extraUserData: [
+    'client_ip_address' => request()->ip(),
+    'client_user_agent' => request()->userAgent(),
+    'fbp' => request()->cookie('_fbp'),
+    'fbc' => request()->cookie('_fbc'),
+]);
+```
+
+When running in queue/console context, the package automatically:
+- Falls back to `config('app.url')` for `event_source_url`
+- Uses `$userData['client_ip_address']` for event ID generation instead of `request()->ip()`
+- Passes `external_id` through to Meta's CAPI `user_data`
+
 ## Artisan Commands
 
 ```bash
