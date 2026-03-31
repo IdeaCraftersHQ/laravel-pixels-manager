@@ -6,6 +6,7 @@ use Ideacrafters\PixelManager\Database\Factories\PixelFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Crypt;
 
 /**
@@ -15,8 +16,8 @@ use Illuminate\Support\Facades\Crypt;
  * @property string|null $access_token
  * @property string|null $test_event_code
  * @property bool $is_active
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
  *
  * @method static Builder|static active()
  * @method static Builder|static hasAccessToken()

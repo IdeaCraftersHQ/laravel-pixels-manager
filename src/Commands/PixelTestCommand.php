@@ -3,6 +3,7 @@
 namespace Ideacrafters\PixelManager\Commands;
 
 use Ideacrafters\PixelManager\Facades\PixelManager as PixelManagerFacade;
+use Ideacrafters\PixelManager\Models\Pixel;
 use Illuminate\Console\Command;
 
 class PixelTestCommand extends Command
@@ -31,7 +32,7 @@ class PixelTestCommand extends Command
         if (! $pixelId) {
             $pixel = $this->selectPixel();
         } else {
-            $modelClass = config('pixels-manager.model', \Ideacrafters\PixelManager\Models\Pixel::class);
+            $modelClass = config('pixels-manager.model', Pixel::class);
             $pixel = $modelClass::findOrFail($pixelId);
         }
 
@@ -78,7 +79,7 @@ class PixelTestCommand extends Command
 
     protected function selectPixel()
     {
-        $modelClass = config('pixels-manager.model', \Ideacrafters\PixelManager\Models\Pixel::class);
+        $modelClass = config('pixels-manager.model', Pixel::class);
         $pixels = $modelClass::active()->get();
 
         if ($pixels->isEmpty()) {

@@ -36,7 +36,7 @@ class PixelManagerServiceProvider extends PackageServiceProvider
     {
         parent::boot();
 
-        $this->app->singleton(\Ideacrafters\PixelManager\PixelManager::class);
+        $this->app->singleton(PixelManager::class);
 
         $this->registerBladeDirectives();
     }
