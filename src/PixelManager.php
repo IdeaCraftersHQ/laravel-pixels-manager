@@ -6,6 +6,7 @@ use Ideacrafters\PixelManager\Exceptions\InvalidEventException;
 use Ideacrafters\PixelManager\Exceptions\InvalidPlatformException;
 use Ideacrafters\PixelManager\Jobs\SendPixelEvent;
 use Ideacrafters\PixelManager\Models\Pixel;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 
 class PixelManager
@@ -67,9 +68,9 @@ class PixelManager
     /**
      * Target specific pixel IDs.
      *
-     * @param  int|array<int>|\Illuminate\Support\Collection  ...$pixelIds
+     * @param  int|array<int>|Collection  ...$pixelIds
      */
-    public function forPixels(int|array|\Illuminate\Support\Collection ...$pixelIds): static
+    public function forPixels(int|array|Collection ...$pixelIds): static
     {
         $this->targetPixelIds = collect($pixelIds)
             ->flatten()
@@ -99,13 +100,13 @@ class PixelManager
     /**
      * Add a new pixel configuration.
      *
-     * @return \Ideacrafters\PixelManager\Models\Pixel
+     * @return Pixel
      */
     public function addPixel(string $platform, string $pixelId, ?string $accessToken = null)
     {
         $this->validatePlatform($platform);
 
-        $modelClass = config('pixels-manager.model', \Ideacrafters\PixelManager\Models\Pixel::class);
+        $modelClass = config('pixels-manager.model', Pixel::class);
 
         return $modelClass::create([
             'platform' => $platform,
@@ -120,7 +121,7 @@ class PixelManager
      */
     public function enablePixel(int $id): bool
     {
-        $modelClass = config('pixels-manager.model', \Ideacrafters\PixelManager\Models\Pixel::class);
+        $modelClass = config('pixels-manager.model', Pixel::class);
         $pixel = $modelClass::findOrFail($id);
         $pixel->update(['is_active' => true]);
 
@@ -132,7 +133,7 @@ class PixelManager
      */
     public function disablePixel(int $id): bool
     {
-        $modelClass = config('pixels-manager.model', \Ideacrafters\PixelManager\Models\Pixel::class);
+        $modelClass = config('pixels-manager.model', Pixel::class);
         $pixel = $modelClass::findOrFail($id);
         $pixel->update(['is_active' => false]);
 
@@ -146,7 +147,7 @@ class PixelManager
      */
     public function getActivePixels()
     {
-        $modelClass = config('pixels-manager.model', \Ideacrafters\PixelManager\Models\Pixel::class);
+        $modelClass = config('pixels-manager.model', Pixel::class);
 
         return $modelClass::active()->get();
     }
@@ -159,7 +160,7 @@ class PixelManager
     protected function getApplicablePixels()
     {
         /** @var class-string<Pixel> $modelClass */
-        $modelClass = config('pixels-manager.model', \Ideacrafters\PixelManager\Models\Pixel::class);
+        $modelClass = config('pixels-manager.model', Pixel::class);
         $query = $modelClass::active()->hasAccessToken();
 
         if ($this->targetPixelIds !== null) {
@@ -176,7 +177,7 @@ class PixelManager
     /**
      * Validate event name.
      *
-     * @throws \Ideacrafters\PixelManager\Exceptions\InvalidEventException
+     * @throws InvalidEventException
      */
     protected function validateEvent(string $event): void
     {
@@ -190,7 +191,7 @@ class PixelManager
     /**
      * Validate platform name.
      *
-     * @throws \Ideacrafters\PixelManager\Exceptions\InvalidPlatformException
+     * @throws InvalidPlatformException
      */
     public function validatePlatform(string $platform): void
     {
@@ -204,7 +205,7 @@ class PixelManager
     /**
      * Validate array of platform names.
      *
-     * @throws \Ideacrafters\PixelManager\Exceptions\InvalidPlatformException
+     * @throws InvalidPlatformException
      */
     protected function validatePlatforms(array $platforms): void
     {

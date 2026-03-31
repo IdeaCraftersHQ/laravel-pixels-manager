@@ -1,5 +1,10 @@
 <?php
 
+use Ideacrafters\PixelManager\Models\Pixel;
+use Ideacrafters\PixelManager\Platforms\FacebookPixel;
+use Ideacrafters\PixelManager\Platforms\SnapchatPixel;
+use Ideacrafters\PixelManager\Platforms\TikTokPixel;
+
 // config for Ideacrafters/PixelManager
 return [
     /*
@@ -12,7 +17,7 @@ return [
     | custom methods, or override existing behavior.
     |
     */
-    'model' => \Ideacrafters\PixelManager\Models\Pixel::class,
+    'model' => Pixel::class,
 
     /*
     |--------------------------------------------------------------------------
@@ -24,9 +29,9 @@ return [
     |
     */
     'platforms' => [
-        'facebook' => \Ideacrafters\PixelManager\Platforms\FacebookPixel::class,
-        'tiktok' => \Ideacrafters\PixelManager\Platforms\TikTokPixel::class,
-        'snapchat' => \Ideacrafters\PixelManager\Platforms\SnapchatPixel::class,
+        'facebook' => FacebookPixel::class,
+        'tiktok' => TikTokPixel::class,
+        'snapchat' => SnapchatPixel::class,
     ],
 
     /*
