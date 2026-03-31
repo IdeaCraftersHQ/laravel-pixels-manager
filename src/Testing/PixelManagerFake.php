@@ -2,6 +2,8 @@
 
 namespace Ideacrafters\PixelManager\Testing;
 
+use PHPUnit\Framework\AssertionFailedError;
+
 class PixelManagerFake
 {
     protected array $trackedEvents = [];
@@ -21,7 +23,7 @@ class PixelManagerFake
         $found = collect($this->trackedEvents)->contains('event', $event);
 
         if (! $found) {
-            throw new \PHPUnit\Framework\AssertionFailedError(
+            throw new AssertionFailedError(
                 "Expected event '{$event}' was not tracked."
             );
         }
@@ -34,7 +36,7 @@ class PixelManagerFake
         });
 
         if (! $found) {
-            throw new \PHPUnit\Framework\AssertionFailedError(
+            throw new AssertionFailedError(
                 "Expected event '{$event}' with data was not tracked."
             );
         }

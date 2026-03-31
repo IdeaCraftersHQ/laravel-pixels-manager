@@ -11,9 +11,9 @@ trait TrackableEvents
      *
      * @param  string|null  $platforms  Comma-separated list of platforms or null for all
      */
-    public function trackEvent(string $event, array $data = [], ?string $platforms = null): void
+    public function trackEvent(string $event, array $data = [], ?string $platforms = null, array $extraUserData = []): void
     {
-        $userData = $this->getTrackingUserData();
+        $userData = array_merge($this->getTrackingUserData(), $extraUserData);
 
         if ($platforms) {
             PixelManager::forPlatforms(...explode(',', $platforms))

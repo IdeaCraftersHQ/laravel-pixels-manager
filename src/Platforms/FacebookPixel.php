@@ -20,16 +20,25 @@ class FacebookPixel extends AbstractPlatform
     {
         $userData = $this->hashUserData($userData);
 
+        // Allow caller to provide custom event_id and event_source_url
+        $eventId = $data['event_id'] ?? $this->generateEventId($event, $data, $userData);
+        $eventSourceUrl = $data['event_source_url']
+            ?? (app()->runningInConsole() ? config('app.url') : request()->fullUrl());
+
+        // Strip meta keys before building custom_data
+        $customData = $data;
+        unset($customData['event_id'], $customData['event_source_url']);
+
         return [
             'data' => [
                 [
                     'event_name' => $this->mapEvent($event),
                     'event_time' => now()->timestamp,
-                    'event_id' => $this->generateEventId($event, $data, $userData),
-                    'event_source_url' => request()->fullUrl(),
+                    'event_id' => $eventId,
+                    'event_source_url' => $eventSourceUrl,
                     'action_source' => 'website',
                     'user_data' => $this->buildUserData($userData),
-                    'custom_data' => $this->buildCustomData($data),
+                    'custom_data' => $this->buildCustomData($customData),
                 ],
             ],
             'test_event_code' => $this->pixel->test_event_code,
@@ -87,6 +96,10 @@ class FacebookPixel extends AbstractPlatform
 
         if (isset($userData['fbc']) || isset($userData['_fbc'])) {
             $mapped['fbc'] = $userData['fbc'] ?? $userData['_fbc'];
+        }
+
+        if (isset($userData['external_id'])) {
+            $mapped['external_id'] = $userData['external_id'];
         }
 
         // If not running from console, auto-populate missing fields from request/cookie
@@ -198,13 +211,16 @@ class FacebookPixel extends AbstractPlatform
 
     protected function generateEventId(string $event, array $data, array $userData): string
     {
+        $ip = $userData['client_ip_address']
+            ?? (app()->runningInConsole() ? '' : request()->ip());
+
         $parts = [
             $event,
             $this->pixel->pixel_id,
             now()->toDateTimeString(),
             json_encode($data),
             json_encode($userData),
-            request()->ip(),
+            $ip,
         ];
 
         return hash('sha256', implode('|', $parts));

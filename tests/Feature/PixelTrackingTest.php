@@ -1,5 +1,7 @@
 <?php
 
+use Ideacrafters\PixelManager\Exceptions\InvalidEventException;
+use Ideacrafters\PixelManager\Exceptions\InvalidPlatformException;
 use Ideacrafters\PixelManager\Facades\PixelManager;
 use Ideacrafters\PixelManager\Jobs\SendPixelEvent;
 use Ideacrafters\PixelManager\Models\Pixel;
@@ -45,10 +47,10 @@ test('can exclude platforms from tracking', function () {
 
 test('throws exception for invalid event', function () {
     expect(fn () => PixelManager::track('InvalidEvent'))
-        ->toThrow(\Ideacrafters\PixelManager\Exceptions\InvalidEventException::class);
+        ->toThrow(InvalidEventException::class);
 });
 
 test('throws exception for invalid platform', function () {
     expect(fn () => PixelManager::forPlatforms('invalid-platform'))
-        ->toThrow(\Ideacrafters\PixelManager\Exceptions\InvalidPlatformException::class);
+        ->toThrow(InvalidPlatformException::class);
 });
