@@ -2,14 +2,25 @@
 
 All notable changes to `laravel-pixels-manager` will be documented in this file.
 
+## Improvements - 2026-06-05
+
+### What's Changed
+
+* Bump ramsey/composer-install from 3 to 4 by @dependabot[bot] in https://github.com/IdeaCraftersHQ/laravel-pixels-manager/pull/6
+* Bump dependabot/fetch-metadata from 2.5.0 to 3.1.0 by @dependabot[bot] in https://github.com/IdeaCraftersHQ/laravel-pixels-manager/pull/9
+
+**Full Changelog**: https://github.com/IdeaCraftersHQ/laravel-pixels-manager/compare/1.2.0...1.2.1
+
 ## Release 1.2.0 Queue-safe CAPI, custom event_id, extraUserData — 2026-03-31
 
 ### What's Changed
 
 **`TrackableEvents` trait:**
+
 - `trackEvent()` now accepts an optional `array $extraUserData` parameter that merges with `getTrackingUserData()`. Pass browser context (`client_ip_address`, `client_user_agent`, `fbp`, `fbc`) when firing events from HTTP context for use in queued CAPI calls.
 
 **`FacebookPixel`:**
+
 - `buildPayload()` accepts `event_id` in `$data` for client-server dedup — falls back to auto-generated ID
 - `buildPayload()` accepts `event_source_url` in `$data` — falls back to `config('app.url')` in queue context instead of calling `request()->fullUrl()`
 - `buildPayload()` strips `event_id` and `event_source_url` from `custom_data` before sending
