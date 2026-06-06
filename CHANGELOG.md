@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-pixels-manager` will be documented in this file.
 
+## Version bump - 2026-06-06
+
+**Full Changelog**: https://github.com/IdeaCraftersHQ/laravel-pixels-manager/compare/1.2.1...1.2.2
+
 ## Improvements - 2026-06-05
 
 ### What's Changed
